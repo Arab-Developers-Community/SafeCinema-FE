@@ -64,7 +64,7 @@ function SlideItem({ item }: SlideItemProps) {
 interface SlickSliderProps {
   data: PaginatedMovieResult;
   genre: Genre | CustomGenre;
-  handleNext: (page: number) => void;
+  handleNext?: (page: number) => void;
 }
 export default function SlickSlider({ data, genre }: SlickSliderProps) {
   const sliderRef = useRef<Slider>(null);

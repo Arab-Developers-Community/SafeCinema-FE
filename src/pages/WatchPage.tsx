@@ -34,7 +34,7 @@ export function Component() {
 
   const navigate = useNavigate();
   const [playerInitialized, setPlayerInitialized] = useState(false);
-
+  const ss = (window as any).localStorage.getItem("LatestPage") == "home";
   const windowSize = useWindowSize();
   const videoJsOptions = useMemo(() => {
     return {
@@ -49,7 +49,7 @@ export function Component() {
         {
           // src: videoData?.video,
           // src: "https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8",
-          src: "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+          src: ss ? "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8" : "file:///Users/irahhal/Desktop/video-player.mp4",
           type: "application/x-mpegurl",
         },
       ],
@@ -109,8 +109,26 @@ export function Component() {
         sx={{
           position: "relative",
         }}
+
       >
-        <VideoJSPlayer options={videoJsOptions} onReady={handlePlayerReady} />
+        {
+          (!ss) ?         <div style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}>
+            <video src="http://127.0.0.1:8080/video-player.mp4" controls
+          
+          style={{
+            maxWidth: "100vw",
+            maxHeight: "100vh",
+            margin: "auto",
+          }}></video>
+          </div>
+          : <VideoJSPlayer options={videoJsOptions} onReady={handlePlayerReady} />
+        }
+        
         {playerRef.current && playerInitialized && (
           <Box
             sx={{
@@ -141,7 +159,7 @@ export function Component() {
                   color: "white",
                 }}
               >
-                Title
+                 
               </Typography>
             </Box>
             <Box
@@ -236,7 +254,7 @@ export function Component() {
                     textAlign="center"
                     sx={{ maxWidth: 300, mx: "auto", color: "white" }}
                   >
-                    Description
+                     
                   </MaxLineTypography>
                 </Box>
                 {/* end middle time */}

@@ -17,6 +17,10 @@ const router = createBrowserRouter([
         lazy: () => import("src/pages/HomePage"),
       },
       {
+        path: "available-now",
+        lazy: () => import("src/pages/AvailablePage"),
+      },
+      {
         path: MAIN_PATH.genreExplore,
         children: [
           {

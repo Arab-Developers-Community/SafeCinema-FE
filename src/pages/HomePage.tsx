@@ -15,6 +15,7 @@ export async function loader() {
 }
 export function Component() {
   const { data: genres, isSuccess } = useGetGenresQuery(MEDIA_TYPE.Movie);
+  (window as any).localStorage.setItem("LatestPage", "home")
 
   if (isSuccess && genres && genres.length > 0) {
     return (

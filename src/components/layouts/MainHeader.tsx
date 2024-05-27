@@ -16,7 +16,13 @@ import Logo from "../Logo";
 import SearchBox from "../SearchBox";
 import NetflixNavigationLink from "../NetflixNavigationLink";
 
-const pages = ["My List", "Movies", "Tv Shows"];
+const pages = [{
+  label: "Trailers",
+  link: "/browse",
+}, {
+  label: "Available Now",
+  link: "/available-now",
+}];
 
 const MainHeader = () => {
   const isOffset = useOffSetTop(APP_BAR_HEIGHT);
@@ -93,28 +99,13 @@ const MainHeader = () => {
             }}
           >
             {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
+              <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">{page.label}</Typography>
               </MenuItem>
             ))}
           </Menu>
         </Box>
-        <Typography
-          variant="h5"
-          noWrap
-          component="a"
-          href=""
-          sx={{
-            mr: 2,
-            display: { xs: "flex", md: "none" },
-            flexGrow: 1,
-            fontWeight: 700,
-            color: "inherit",
-            textDecoration: "none",
-          }}
-        >
-          Netflix
-        </Typography>
+
         <Stack
           direction="row"
           spacing={3}
@@ -122,45 +113,18 @@ const MainHeader = () => {
         >
           {pages.map((page) => (
             <NetflixNavigationLink
-              to=""
+              to={page.link}
               variant="subtitle1"
-              key={page}
+              key={page.label}
               onClick={handleCloseNavMenu}
             >
-              {page}
+              {page.label}
             </NetflixNavigationLink>
           ))}
         </Stack>
 
         <Box sx={{ flexGrow: 0, display: "flex", gap: 2 }}>
           <SearchBox />
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="user_avatar" src="/avatar.png" variant="rounded" />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: "45px" }}
-            id="avatar-menu"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {["Account", "Logout"].map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
         </Box>
       </Toolbar>
     </AppBar>
