@@ -4,9 +4,11 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "start": "concurrently \"npm run dev\" \"npm run video\"",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "video": "live-server --port=7432 --no-browser ./video"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -14,7 +16,9 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.0",
     "@reduxjs/toolkit": "^1.8.3",
+    "concurrently": "^8.2.2",
     "framer-motion": "^7.1.0",
+    "live-server": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
